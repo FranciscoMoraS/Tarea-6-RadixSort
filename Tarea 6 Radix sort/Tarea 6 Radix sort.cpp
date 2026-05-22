@@ -10,8 +10,41 @@ using std::ws;
 using std::streamsize;
 using std::numeric_limits;
 
+int potencia(int base, int exponente) {
+    int res = 1;
+    for (int i = 0; i < exponente; i++) {
+        res *= base;
+    }
+    return res;
+}
 void radixSort(int base,List<int>&lista ) {
+    linkedList<linkedList<int>*> Baldes;
+    for (int i = 0; i < base; i++) {
+        linkedList<int>* lista = new linkedList<int>();
+        Baldes.append(lista);
+    }
+    int res;
+    int num;
+    for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < lista.getSize(); i++) {
+            lista.goToPos(i);
+            num = lista.getElement();
+            res = (num / potencia(base, j)) % base;
+            Baldes.goToPos(res);
+            Baldes.getElement()->append(num);
+        }
+        lista.clear();
+        for (int numBalde = 0; numBalde < base; numBalde++) {
+            Baldes.goToPos(numBalde);
+            while (Baldes.getElement()->getSize() != 0) {
+                int temp;
+                Baldes.getElement()->goToStart();
+                temp = Baldes.getElement()->remove();
+                lista.append(temp);
+            }
+        }
 
+    }
 }
 
 
@@ -44,7 +77,7 @@ int main()
         lista.print();
         radixSort(base, lista);
 
-        cout << "\n" << "Lista ordenada: ";
+        cout << "\n" << "Lista ordenada: \n";
         lista.print();
         cout << "Desea repetir el programa? \n";
         cout << "[1] : si \n";

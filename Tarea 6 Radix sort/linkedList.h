@@ -120,14 +120,14 @@ public:
 		return size;
 	}
 	void print() {
-		Node<E>* temp = head;
-		int contador = 1;
-		while (temp->next != nullptr) {
-			cout <<contador << " " << temp->next->element << endl;
+		Node<E>* temp = head->next;
+		cout << "[ ";
+		while (temp != nullptr) {
+			cout << temp->element;
 			temp = temp->next;
-			contador++;
+			if (temp != nullptr) cout << ", ";
 		}
-		cout << "]" << endl;
+		cout << " ]\n";
 	}
 };
 
