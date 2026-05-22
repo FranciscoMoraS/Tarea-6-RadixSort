@@ -59,7 +59,7 @@ int main()
 {
     bool seguir = true;
     while (seguir) {
-        cout << "Ingrese el tamaño de la lista que desea ordenar: \n";
+        cout << "Ingrese el tamano de la lista que desea ordenar: \n";
         int tamano;
         while (!(cin >> ws >> tamano) || tamano <= 0) {
             cout << "Debe ser un numero entero positivo: ";
@@ -69,7 +69,7 @@ int main()
 
         cout << "Ingrese la base numerica que desea utilizar: \n";
         int base;
-        while (!(cin >> ws >> base)) {
+        while (!(cin >> ws >> base)|| base<=0) {
             cout << "Debe ser un numero entero: ";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -80,12 +80,16 @@ int main()
         for (int i = 0; i < tamano; i++) {
             lista.append(rand());
         }
+        
+        time_t creacionLista = time(nullptr);
         cout << "Lista sin ordenar: \n";
         lista.print();
         radixSort(base, lista);
 
         cout << "\n" << "Lista ordenada: \n";
         lista.print();
+        time_t listaOrdenada = time(nullptr);
+        cout << "Tiempo que se duro en ordenar la lista: " << difftime(listaOrdenada, creacionLista) << "\n";
         cout << "Desea repetir el programa? \n";
         cout << "[1] : si \n";
         cout << "[2] : no \n";
