@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 #include "List.h"
 #include "linkedList.h"
 
@@ -9,6 +10,8 @@ using std::cin;
 using std::ws;
 using std::streamsize;
 using std::numeric_limits;
+using std::log;
+using std::floor;
 
 int potencia(int base, int exponente) {
     int res = 1;
@@ -16,6 +19,9 @@ int potencia(int base, int exponente) {
         res *= base;
     }
     return res;
+}
+int calcTotalDigitos(int base) {
+    return (int)floor(log((double)32767) / log((double)base)) + 1;
 }
 void radixSort(int base,List<int>&lista ) {
     linkedList<linkedList<int>*> Baldes;
@@ -25,7 +31,8 @@ void radixSort(int base,List<int>&lista ) {
     }
     int res;
     int num;
-    for (int j = 0; j < 5; j++) {
+    int totalIteraciones = calcTotalDigitos(base);
+    for (int j = 0; j < totalIteraciones; j++) {
         for (int i = 0; i < lista.getSize(); i++) {
             lista.goToPos(i);
             num = lista.getElement();
